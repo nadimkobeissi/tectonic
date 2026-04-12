@@ -71,3 +71,22 @@ impl<T: CoreType> CFArray<T> {
         unsafe { T::new_borrowed(ptr.cast()) }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::CFString;
+
+    #[test]
+    fn test_array_index() {
+        let foo = CFString::new("foo");
+        let bar = CFString::new("bar");
+
+        let arr = CFArray::new(&[foo.clone(), bar.clone()]);
+
+        assert_eq!(arr[0].as_type_ref(), foo.as_type_ref());
+        assert_eq!(arr[1].as_type_ref(), bar.as_type_ref());
+        assert_eq!(arr[0].as_str(), "foo");
+        assert_eq!(arr[1].as_str(), "bar");
+    }
+}
