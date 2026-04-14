@@ -189,13 +189,13 @@ mod tests {
         assert_eq!(str.as_str(), Cow::Borrowed("foo"));
 
         let non_str = CFString::new(c"\xC3\x28bar");
-        assert_eq!(non_str.as_str(), Cow::Owned("\0\0bar"));
+        assert_eq!(non_str.as_str(), Cow::Owned("\0\0bar".to_string()));
     }
 
     #[test]
     fn test_as_cstr() {
         let str = CFString::new("foo");
-        assert_eq!(str.as_cstr(), Cow::Owned(c"foo"));
+        assert_eq!(str.as_cstr(), Cow::Owned(c"foo".to_owned()));
 
         let cstr = CFString::new(c"foo");
         assert_eq!(cstr.as_cstr(), Cow::Borrowed(c"foo"));
