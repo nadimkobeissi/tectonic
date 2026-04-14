@@ -75,6 +75,7 @@ cfty! {
 }
 
 impl<K: CoreType, V: CoreType> CFDictionary<K, V> {
+    // TODO: Bind the keys/values of P to K and V
     /// Create a new [`CFDictionary`] that contains the provided key/value pairs.
     pub fn new<P: Pairs>(pairs: P) -> CFDictionary<K, V> {
         let (keys, values) = pairs.into_pairs();
