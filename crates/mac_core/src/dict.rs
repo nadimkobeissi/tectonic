@@ -96,3 +96,31 @@ impl<K: CoreType, V: CoreType> CFDictionary<K, V> {
         unsafe { CFDictionary::new_owned(ptr) }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::CFString;
+
+    #[test]
+    fn test_new_arr() {
+        let one = CFString::new("1");
+        let two = CFString::new("2");
+        let three = CFString::new("3");
+        let four = CFString::new("4");
+
+        let _ = CFDictionary::new([]);
+        let _ = CFDictionary::new([(one, two), (three, four)]);
+    }
+
+    #[test]
+    fn test_new_vec() {
+        let one = CFString::new("1");
+        let two = CFString::new("2");
+        let three = CFString::new("3");
+        let four = CFString::new("4");
+
+        let _ = CFDictionary::new(vec![]);
+        let _ = CFDictionary::new(vec![(one, two), (three, four)]);
+    }
+}

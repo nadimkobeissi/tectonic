@@ -89,4 +89,16 @@ mod tests {
         assert_eq!(arr[0].as_str(), "foo");
         assert_eq!(arr[1].as_str(), "bar");
     }
+
+    #[test]
+    fn test_array_len() {
+        let empty = CFArray::empty();
+        let two = CFArray::new(&[CFString::new("foo"), CFString::new("bar")]);
+
+        assert!(empty.is_empty());
+        assert_eq!(empty.len(), 0);
+
+        assert!(!two.is_empty());
+        assert_eq!(empty.len(), 2);
+    }
 }
