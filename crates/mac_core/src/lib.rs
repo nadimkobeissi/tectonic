@@ -167,4 +167,24 @@ mod tests {
         assert_eq!(CFTypeId::of_val(&ty), CFTypeId::of::<CFArray<CFType>>());
         drop(ty);
     }
+
+    #[test]
+    fn test_downcast() {
+        let arr = CFArray::<CFType>::empty();
+        let ty = arr.into_ty();
+
+        assert!(unsafe { ty.downcast::<CFArray<CFType>>() }.is_ok());
+
+        let arr = CFArray::<CFType>::empty();
+        let ty = arr.into_ty();
+        assert!(unsafe { ty.downcast::<CFString>() }.is_err());
+
+        let str = CFString::new("");
+        let ty = str.into_ty();
+        assert!(unsafe { ty.downcast::<CFString>() }.is_ok());
+
+        let str = CFString::new("");
+        let ty = str.into_ty();
+        assert!(unsafe { ty.downcast::<CFArray<CFString>>() }.is_err());
+    }
 }

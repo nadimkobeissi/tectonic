@@ -99,6 +99,6 @@ mod tests {
         assert_eq!(empty.len(), 0);
 
         assert!(!two.is_empty());
-        assert_eq!(empty.len(), 2);
+        assert_eq!(two.len(), 2);
     }
 }
